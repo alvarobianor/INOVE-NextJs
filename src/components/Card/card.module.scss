@@ -1,0 +1,22 @@
+.Card {
+  display: flex;
+  width: 20rem;
+  height: 10rem;
+  background-color: var(--cyan-500);
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50px;
+
+  :hover {
+    background-color: aquamarine;
+    cursor: pointer;
+  }
+
+  p {
+    color: darkred;
+  }
+}

@@ -1,33 +1,48 @@
 import { GetServerSideProps } from "next";
 // import { GetStaticProps } from "next";
 
-import Head from "next/head";
+import Card from "../components/Card";
 
 import style from "./home.module.scss";
 
-type ProductType = {
+export type PersonType = {
+  id?: number;
   name: string;
   phone: string;
   email: string;
-  address: string;
-  postalZip: string;
-  region: string;
+  address?: string;
+  postalZip?: string;
+  region?: string;
   country: string;
-  numberrange: number;
 };
 
 type HomeProps = {
-  products: ProductType[];
+  persons: PersonType[];
 };
 
-export default function Home({ products }: HomeProps) {
-  return <></>;
+export default function Home({ persons }: HomeProps) {
+  return (
+    <div className={style.contentContainer}>
+      {persons.map((person) => {
+        return (
+          <Card
+            key={person.id}
+            name={person.name}
+            email={person.email}
+            phone={person.phone}
+            country={person.country}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 // export const getStaticProps: GetStaticProps = async () => {
 export const getServerSideProps: GetServerSideProps = async () => {
-  const products = [
+  const persons = [
     {
+      id: 10,
       name: "Emerson Albert",
       phone: "(625) 788-3333",
       email: "ornare.sagittis@outlook.couk",
@@ -35,9 +50,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       postalZip: "7168",
       region: "Aceh",
       country: "Russian Federation",
-      numberrange: 10,
     },
     {
+      id: 2,
       name: "Dante Mcconnell",
       phone: "(564) 367-5865",
       email: "et.rutrum@protonmail.edu",
@@ -45,9 +60,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       postalZip: "535874",
       region: "Cajamarca",
       country: "Spain",
-      numberrange: 2,
     },
     {
+      id: 1,
       name: "Declan Bonner",
       phone: "1-639-138-8877",
       email: "sed.libero.proin@outlook.net",
@@ -55,9 +70,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       postalZip: "35-571",
       region: "Mazowieckie",
       country: "Nigeria",
-      numberrange: 1,
     },
     {
+      id: 0,
       name: "Eve Kerr",
       phone: "1-220-626-5343",
       email: "arcu.curabitur@yahoo.org",
@@ -65,9 +80,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       postalZip: "28383",
       region: "Languedoc-Roussillon",
       country: "Nigeria",
-      numberrange: 0,
     },
     {
+      id: 8,
       name: "Lucius Stewart",
       phone: "1-800-216-0122",
       email: "ipsum@hotmail.net",
@@ -75,12 +90,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
       postalZip: "32265",
       region: "Connacht",
       country: "Poland",
-      numberrange: 8,
     },
   ];
   return {
     props: {
-      products,
+      persons,
     },
     // revalidate: 60 * 60 * 24 * 30 //1 mês
   };
